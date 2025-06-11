@@ -3,16 +3,19 @@ import Header from "./components/Header";
 import TodoEditor from "./components/TodoEditor";
 import TodoFilterSort from "./components/TodoFilterSort";
 import TodoList from "./components/TodoList";
+import { RecoilRoot } from "recoil";
 
 function App() {
     return (
         <>
-            <Wrapper>
-                <Header />
-                <TodoEditor />
-                <TodoFilterSort />
-                <TodoList />
-            </Wrapper>
+            <RecoilRoot>
+                <Wrapper>
+                    <Header />
+                    <TodoEditor />
+                    <TodoFilterSort />
+                    <TodoList />
+                </Wrapper>
+            </RecoilRoot>
         </>
     );
 }

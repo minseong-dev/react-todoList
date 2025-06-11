@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-const TodoItem = () => {
+const TodoItem = ({ item }) => {
     return (
         <Wrapper>
-            <Input type="checkbox" />
-            <Content>Todo</Content>
-            <Pv>상</Pv>
-            <Date>2025.06.10</Date>
+            <Input type="checkbox" value={item.isDone} />
+            <Content>{item.content}</Content>
+            <Pv>{item.priority}</Pv>
+            <Date>{item.createdDate}</Date>
             <Button>수정</Button>
             <Button>삭제</Button>
         </Wrapper>

@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
+import { useRecoilValue } from "recoil";
+import { todoListState } from "../recoil/todo/todoListState";
 
 const TodoList = () => {
+    const todoList = useRecoilValue(todoListState);
+
     return (
         <Wrapper>
             <Input placeholder="검색어를 입력하세요" />
-            <TodoItem />
-            <TodoItem />
+            {todoList.map((todo) => (
+                <TodoItem key={todo.id} item={todo} />
+            ))}
         </Wrapper>
     );
 };
