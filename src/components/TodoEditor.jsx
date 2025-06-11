@@ -1,18 +1,15 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilState } from "recoil";
 import { todoListState } from "../recoil/todo/todoListState";
-
-let id = 0;
-const getId = () => {
-    return id++;
-};
+import { todoIdState } from "../recoil/todo/todoIdState";
 
 const TodoEditor = () => {
     const [inputData, setInputData] = useState({
         content: "",
         priority: "",
     });
+    const [todoId, setTodoId] = useRecoilState(todoIdState);
     const setTodoList = useSetRecoilState(todoListState);
 
     const onChangeInputData = (e) => {
@@ -26,13 +23,16 @@ const TodoEditor = () => {
         setTodoList((todoList) => [
             ...todoList,
             {
-                id: getId(),
+                id: todoId,
                 content: inputData.content,
                 priority: inputData.priority,
                 createdDate: new Date().toLocaleDateString(),
                 isDone: false,
             },
         ]);
+
+        setTodoId(todoId + 1);
+
         setInputData({
             content: "",
             priority: "",
@@ -50,9 +50,9 @@ const TodoEditor = () => {
             <PrioritySelect
                 onChange={onChangeInputData}
                 name="priority"
-                value={inputData.priority}
+                defaultValue="default"
             >
-                <option value="" disabled selected>
+                <option value="default" disabled hidden>
                     우선순위
                 </option>
                 <option value={"상"}>상</option>
