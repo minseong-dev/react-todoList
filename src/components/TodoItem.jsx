@@ -1,15 +1,26 @@
+import { useState } from "react";
 import styled from "styled-components";
+import TodoModal from "./TodoModal";
 
 const TodoItem = ({ item }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
     return (
-        <Wrapper>
-            <Input type="checkbox" value={item.isDone} />
-            <Content>{item.content}</Content>
-            <Pv>{item.priority}</Pv>
-            <Date>{item.createdDate}</Date>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-        </Wrapper>
+        <>
+            <Wrapper>
+                <Input type="checkbox" value={item.isDone} />
+                <Content>{item.content}</Content>
+                <Pv>{item.priority}</Pv>
+                <Date>{item.createdDate}</Date>
+                <Button onClick={openModal}>수정</Button>
+                <Button>삭제</Button>
+            </Wrapper>
+
+            {isModalOpen && <TodoModal onClose={closeModal} item={item} />}
+        </>
     );
 };
 
