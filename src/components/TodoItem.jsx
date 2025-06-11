@@ -1,12 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
 import TodoModal from "./TodoModal";
+import { useRecoilState } from "recoil";
+import { todoListState } from "../recoil/todo/todoListState";
 
 const TodoItem = ({ item }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [todoList, setTodoList] = useRecoilState(todoListState);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+
+    const deleteItem = () => {
+        const newTodoList = todoList.filter(
+            (todo) => String(todo.id) !== String(item.id)
+        );
+        setTodoList(newTodoList);
+    };
 
     return (
         <>
@@ -16,7 +26,7 @@ const TodoItem = ({ item }) => {
                 <Pv>{item.priority}</Pv>
                 <Date>{item.createdDate}</Date>
                 <Button onClick={openModal}>수정</Button>
-                <Button>삭제</Button>
+                <Button onClick={deleteItem}>삭제</Button>
             </Wrapper>
 
             {isModalOpen && <TodoModal onClose={closeModal} item={item} />}
