@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
 import { useRecoilValue } from "recoil";
-import { todoListState } from "../recoil/todo/todoListState";
+import { sortedTodoList } from "../recoil/todo/sortSelector";
 
 const TodoList = () => {
-    const todoList = useRecoilValue(todoListState);
+    const todoList = useRecoilValue(sortedTodoList);
 
     return (
         <Wrapper>
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 `;
 
 const Input = styled.input`
-    width: 100%;
+    flex: 1;
     border: none;
     border-bottom: 1px solid rgb(220, 220, 220);
     padding: 15px 0px;

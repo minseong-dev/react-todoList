@@ -1,20 +1,46 @@
 import styled from "styled-components";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { filterState } from "../recoil/todo/filterState";
+import { sortState } from "../recoil/todo/sortState";
+
+const PRIORITY_OPTIONS = ["상", "중", "하"];
 
 const TodoFilterSort = () => {
+    const [filters, setFilter] = useRecoilState(filterState);
+    const setSort = useSetRecoilState(sortState);
+
+    const onClickFilter = (priority) => {
+        const newFilter = filters.includes(priority)
+            ? filters.filter((item) => item != priority)
+            : [...filters, priority];
+
+        setFilter(newFilter);
+    };
+
+    const onChangeSort = (e) => {
+        setSort(e.target.value);
+    };
+
     return (
         <Wrapper>
             <FilterWrapper>
-                <FilterBtn>상</FilterBtn>
-                <FilterBtn>중</FilterBtn>
-                <FilterBtn>하</FilterBtn>
+                {PRIORITY_OPTIONS.map((priority) => (
+                    <FilterBtn
+                        key={priority}
+                        onClick={() => onClickFilter(priority)}
+                        active={filters.includes(priority)}
+                    >
+                        {priority}
+                    </FilterBtn>
+                ))}
             </FilterWrapper>
-            <SortSelect>
-                <option value="" disabled selected>
+            <SortSelect onChange={onChangeSort} defaultValue={"default"}>
+                <option value="default" disabled hidden>
                     정렬
                 </option>
-                <option value={""}>최신순</option>
-                <option value={""}>오래된순</option>
-                <option value={""}>우선순위순</option>
+                <option value={"latest"}>최신순</option>
+                <option value={"oldest"}>오래된순</option>
+                <option value={"priority"}>우선순위순</option>
             </SortSelect>
         </Wrapper>
     );
