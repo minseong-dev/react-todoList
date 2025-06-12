@@ -8,7 +8,9 @@ export const todoListState = atom({
             const storeKey = "todo";
 
             const savedTodo = localStorage.getItem(storeKey);
-            savedTodo ? setSelf(savedTodo) : [];
+            if (savedTodo != null) {
+                setSelf(JSON.parse(savedTodo));
+            }
 
             onSet((newTodoList) => {
                 localStorage.setItem(storeKey, JSON.stringify(newTodoList));
