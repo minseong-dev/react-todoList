@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { todoListState } from "../recoil/atoms/todoListState";
 import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
+import { useTodoActions } from "../recoil/actions/useTodoActions";
 
 const TodoModal = ({ onClose, item }) => {
     const [inputData, setInputData] = useState({ ...item });
-    const [todoList, setTodoList] = useRecoilState(todoListState);
+    const { updateTodo } = useTodoActions();
 
     const onChangeInputData = (e) => {
         setInputData({
@@ -16,10 +15,7 @@ const TodoModal = ({ onClose, item }) => {
     };
 
     const updateItem = () => {
-        const newTodoList = todoList.map((todo) =>
-            String(todo.id) === String(inputData.id) ? inputData : todo
-        );
-        setTodoList(newTodoList);
+        updateTodo(item.id, inputData);
         onClose();
     };
 

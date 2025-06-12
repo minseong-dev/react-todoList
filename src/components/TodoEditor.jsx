@@ -1,17 +1,14 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useSetRecoilState, useRecoilState } from "recoil";
-import { todoListState } from "../recoil/atoms/todoListState";
-import { todoIdState } from "../recoil/atoms/todoIdState";
 import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
+import { useTodoActions } from "../recoil/actions/useTodoActions";
 
 const TodoEditor = () => {
     const [inputData, setInputData] = useState({
         content: "",
         priority: "",
     });
-    const [todoId, setTodoId] = useRecoilState(todoIdState);
-    const setTodoList = useSetRecoilState(todoListState);
+    const { addTodo } = useTodoActions();
 
     const onChangeInputData = (e) => {
         setInputData({
@@ -21,18 +18,7 @@ const TodoEditor = () => {
     };
 
     const addItem = () => {
-        setTodoList((todoList) => [
-            ...todoList,
-            {
-                id: todoId,
-                content: inputData.content,
-                priority: inputData.priority,
-                createdDate: new Date().toLocaleDateString(),
-                isDone: false,
-            },
-        ]);
-
-        setTodoId(parseInt(todoId) + 1);
+        addTodo(inputData.content, inputData.priority);
 
         setInputData({
             content: "",

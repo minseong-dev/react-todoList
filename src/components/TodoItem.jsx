@@ -1,36 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
 import TodoModal from "./TodoModal";
-import { useRecoilState } from "recoil";
-import { todoListState } from "../recoil/atoms/todoListState";
 import React from "react";
 import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
+import { useTodoActions } from "../recoil/actions/useTodoActions";
 
 const TodoItem = ({ item }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [todoList, setTodoList] = useRecoilState(todoListState);
     const priorityOption = PRIORITY_OPTIONS.find(
         (option) => option.value === item.priority
     );
+    const { deleteTodo, checkTodo } = useTodoActions();
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    const deleteItem = () => {
-        const newTodoList = todoList.filter(
-            (todo) => String(todo.id) !== String(item.id)
-        );
-        setTodoList(newTodoList);
-    };
-
-    const onChangeCheck = () => {
-        const newTodoList = todoList.map((todo) =>
-            String(todo.id) === String(item.id)
-                ? { ...todo, isDone: !todo.isDone }
-                : todo
-        );
-        setTodoList(newTodoList);
-    };
+    const deleteItem = () => deleteTodo(item.id);
+    const checkItem = () => checkTodo(item.id);
 
     return (
         <>
@@ -38,7 +24,7 @@ const TodoItem = ({ item }) => {
                 <Input
                     type="checkbox"
                     checked={item.isDone}
-                    onChange={onChangeCheck}
+                    onChange={checkItem}
                 />
                 <Content $done={item.isDone ? true : undefined}>
                     {item.content}
