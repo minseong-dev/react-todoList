@@ -15,7 +15,7 @@ export const useTodoActions = () => {
             isDone: false,
         };
         setTodoList([...todoList, newTodo]);
-        setTodoId(parseInt(todoId) + 1);
+        setTodoId(Number(todoId) + 1);
     };
 
     const deleteTodo = (id) => {

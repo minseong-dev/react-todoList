@@ -18,8 +18,12 @@ const TodoEditor = () => {
     };
 
     const addItem = () => {
-        addTodo(inputData.content, inputData.priority);
+        if (!inputData.content.trim() || !inputData.priority.trim()) {
+            alert("내용과 우선순위를 입력하세요.");
+            return;
+        }
 
+        addTodo(inputData.content, inputData.priority);
         setInputData({
             content: "",
             priority: "",

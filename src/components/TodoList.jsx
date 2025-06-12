@@ -8,13 +8,16 @@ const TodoList = () => {
     const todoList = useRecoilValue(searchedTodoList);
     const setSearch = useSetRecoilState(searchState);
 
-    const onChangeSeach = (e) => {
+    const onChangeSearch = (e) => {
         setSearch(e.target.value);
     };
 
     return (
         <Wrapper>
-            <Input placeholder="검색어를 입력하세요" onChange={onChangeSeach} />
+            <Input
+                placeholder="검색어를 입력하세요"
+                onChange={onChangeSearch}
+            />
             {todoList.map((todo) => (
                 <TodoItem key={todo.id} item={todo} />
             ))}

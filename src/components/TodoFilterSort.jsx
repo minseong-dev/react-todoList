@@ -10,7 +10,7 @@ const TodoFilterSort = () => {
 
     const onClickFilter = (priority) => {
         const newFilter = filters.includes(priority)
-            ? filters.filter((item) => item != priority)
+            ? filters.filter((item) => item !== priority)
             : [...filters, priority];
 
         setFilter(newFilter);
@@ -90,5 +90,4 @@ const Dot = styled.span`
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    margin-right: 6px;
 `;

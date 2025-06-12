@@ -15,6 +15,11 @@ const TodoModal = ({ onClose, item }) => {
     };
 
     const updateItem = () => {
+        if (!inputData.content.trim() || !inputData.priority.trim()) {
+            alert("내용과 우선순위를 입력하세요.");
+            return;
+        }
+
         updateTodo(item.id, inputData);
         onClose();
     };

@@ -29,7 +29,10 @@ const TodoItem = ({ item }) => {
                 <Content $done={item.isDone ? true : undefined}>
                     {item.content}
                 </Content>
-                <Dot color={priorityOption.color} />
+                <Dot
+                    color={priorityOption.color}
+                    title={priorityOption.label}
+                />
                 <Date>{item.createdDate}</Date>
                 <Button onClick={openModal}>수정</Button>
                 <Button onClick={deleteItem}>삭제</Button>
@@ -66,7 +69,6 @@ const Dot = styled.span`
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    margin-right: 6px;
 `;
 
 const Date = styled.span`
