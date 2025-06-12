@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TodoModal from "./TodoModal";
 import { useRecoilState } from "recoil";
 import { todoListState } from "../recoil/todo/todoListState";
+import React from "react";
 
 const TodoItem = ({ item }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,11 +19,24 @@ const TodoItem = ({ item }) => {
         setTodoList(newTodoList);
     };
 
+    const onChangeCheck = () => {
+        const newTodoList = todoList.map((todo) =>
+            String(todo.id) === String(item.id)
+                ? { ...todo, isDone: !todo.isDone }
+                : todo
+        );
+        setTodoList(newTodoList);
+    };
+
     return (
         <>
             <Wrapper>
-                <Input type="checkbox" value={item.isDone} />
-                <Content>{item.content}</Content>
+                <Input
+                    type="checkbox"
+                    checked={item.isDone}
+                    onChange={onChangeCheck}
+                />
+                <Content isDone={item.isDone}>{item.content}</Content>
                 <Pv>{item.priority}</Pv>
                 <Date>{item.createdDate}</Date>
                 <Button onClick={openModal}>수정</Button>
@@ -34,7 +48,7 @@ const TodoItem = ({ item }) => {
     );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);
 
 const Wrapper = styled.div`
     display: flex;
@@ -50,6 +64,8 @@ const Input = styled.input`
 
 const Content = styled.span`
     flex: 1;
+    text-decoration: ${(props) => (props.isDone ? "line-through" : "none")};
+    color: ${(props) => (props.isDone ? "gray" : "black")};
 `;
 
 const Pv = styled.span`
