@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { todoListState } from "../recoil/todo/todoListState";
+import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
 
 const TodoModal = ({ onClose, item }) => {
     const [inputData, setInputData] = useState({ ...item });
@@ -36,9 +37,11 @@ const TodoModal = ({ onClose, item }) => {
                         name="priority"
                         value={inputData.priority}
                     >
-                        <option value={"상"}>상</option>
-                        <option value={"중"}>중</option>
-                        <option value={"하"}>하</option>
+                        {PRIORITY_OPTIONS.map(({ value, label }) => (
+                            <option key={value} value={value}>
+                                {label}
+                            </option>
+                        ))}
                     </Select>
                 </TodoContainer>
                 <BtnContainer>
@@ -84,20 +87,25 @@ const Input = styled.input`
     flex: 1;
     font-size: 16px;
     border: none;
-    border-bottom: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid lightgray;
     padding: 5px 0px;
 
     &:focus {
         outline: none;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid rgb(37, 147, 255);
     }
 `;
 
 const Select = styled.select`
+    border: 1px solid lightgray;
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 const BtnContainer = styled.div`
@@ -109,6 +117,7 @@ const Btn = styled.button`
     background-color: white;
     color: black;
     cursor: pointer;
+    border: 1px solid lightgray;
     border-radius: 5px;
     padding: 5px 10px;
 `;

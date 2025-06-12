@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { filterState } from "../recoil/todo/filterState";
 import { sortState } from "../recoil/todo/sortState";
-
-const PRIORITY_OPTIONS = ["상", "중", "하"];
+import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
 
 const TodoFilterSort = () => {
     const [filters, setFilter] = useRecoilState(filterState);
@@ -24,13 +23,14 @@ const TodoFilterSort = () => {
     return (
         <Wrapper>
             <FilterWrapper>
-                {PRIORITY_OPTIONS.map((priority) => (
+                {PRIORITY_OPTIONS.map(({ value, label, color }) => (
                     <FilterBtn
-                        key={priority}
-                        onClick={() => onClickFilter(priority)}
-                        active={filters.includes(priority)}
+                        key={value}
+                        onClick={() => onClickFilter(value)}
+                        $active={filters.includes(value) ? true : undefined}
                     >
-                        {priority}
+                        <Dot color={color} />
+                        {label}
                     </FilterBtn>
                 ))}
             </FilterWrapper>
@@ -60,8 +60,12 @@ const FilterWrapper = styled.div`
 `;
 
 const FilterBtn = styled.button`
-    background-color: white;
-    color: black;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: ${(props) => (props.$active ? "gray" : "white")};
+    color: ${(props) => (props.$active ? "white" : "black")};
+    border: 1px solid ${(props) => (props.$active ? "gray" : "lightgray")};
     cursor: pointer;
     border-radius: 5px;
     padding: 5px 10px;
@@ -69,8 +73,22 @@ const FilterBtn = styled.button`
 `;
 
 const SortSelect = styled.select`
+    border: 1px solid lightgray;
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const Dot = styled.span`
+    background-color: ${(props) => props.color};
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
 `;

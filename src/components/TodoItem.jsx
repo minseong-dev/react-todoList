@@ -4,10 +4,14 @@ import TodoModal from "./TodoModal";
 import { useRecoilState } from "recoil";
 import { todoListState } from "../recoil/todo/todoListState";
 import React from "react";
+import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
 
 const TodoItem = ({ item }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [todoList, setTodoList] = useRecoilState(todoListState);
+    const priorityOption = PRIORITY_OPTIONS.find(
+        (option) => option.value === item.priority
+    );
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -36,8 +40,10 @@ const TodoItem = ({ item }) => {
                     checked={item.isDone}
                     onChange={onChangeCheck}
                 />
-                <Content $isDone={item.isDone}>{item.content}</Content>
-                <Pv>{item.priority}</Pv>
+                <Content $done={item.isDone ? true : undefined}>
+                    {item.content}
+                </Content>
+                <Dot color={priorityOption.color} />
                 <Date>{item.createdDate}</Date>
                 <Button onClick={openModal}>수정</Button>
                 <Button onClick={deleteItem}>삭제</Button>
@@ -64,12 +70,17 @@ const Input = styled.input`
 
 const Content = styled.span`
     flex: 1;
-    text-decoration: ${(props) => (props.isDone ? "line-through" : "none")};
-    color: ${(props) => (props.isDone ? "gray" : "black")};
+    text-decoration: ${(props) => (props.$done ? "line-through" : "none")};
+    color: ${(props) => (props.$done ? "gray" : "black")};
 `;
 
-const Pv = styled.span`
-    font-size: 14px;
+const Dot = styled.span`
+    background-color: ${(props) => props.color};
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
 `;
 
 const Date = styled.span`

@@ -38,6 +38,6 @@ const Input = styled.input`
 
     &:focus {
         outline: none;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid rgb(37, 147, 255);
     }
 `;

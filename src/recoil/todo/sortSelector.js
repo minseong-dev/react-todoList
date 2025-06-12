@@ -1,6 +1,7 @@
 import { selector } from "recoil";
 import { filteredTodoList } from "./filterSelector";
 import { sortState } from "./sortState";
+import { PRIORITY_ORDER } from "../../constants/priorityOptions";
 
 export const sortedTodoList = selector({
     key: "sortedTodoList",
@@ -21,10 +22,9 @@ export const sortedTodoList = selector({
                 );
                 break;
             case "priority": {
-                const priorityOrder = { 상: 1, 중: 2, 하: 3 };
                 sorted.sort(
                     (a, b) =>
-                        priorityOrder[a.priority] - priorityOrder[b.priority]
+                        PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority]
                 );
                 break;
             }

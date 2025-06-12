@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { todoListState } from "../recoil/todo/todoListState";
 import { todoIdState } from "../recoil/todo/todoIdState";
+import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
 
 const TodoEditor = () => {
     const [inputData, setInputData] = useState({
@@ -55,9 +56,11 @@ const TodoEditor = () => {
                 <option value="default" disabled hidden>
                     우선순위
                 </option>
-                <option value={"상"}>상</option>
-                <option value={"중"}>중</option>
-                <option value={"하"}>하</option>
+                {PRIORITY_OPTIONS.map(({ value, label }) => (
+                    <option key={value} value={value}>
+                        {label}
+                    </option>
+                ))}
             </PrioritySelect>
             <AddBtn onClick={addItem}>추가</AddBtn>
         </Wrapper>
@@ -73,19 +76,29 @@ const Wrapper = styled.div`
 
 const TodoInput = styled.input`
     flex: 1;
+    border: 1px solid lightgray;
     border-radius: 5px;
     padding: 0px 10px;
+
+    &:focus {
+        outline-color: rgb(37, 147, 255);
+    }
 `;
 
 const PrioritySelect = styled.select`
+    border: 1px solid lightgray;
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 const AddBtn = styled.button`
-    background-color: #64c964;
+    background-color: rgb(37, 147, 255);
     color: white;
     cursor: pointer;
     border: none;
