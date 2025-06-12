@@ -36,7 +36,7 @@ const TodoItem = ({ item }) => {
                     checked={item.isDone}
                     onChange={onChangeCheck}
                 />
-                <Content isDone={item.isDone}>{item.content}</Content>
+                <Content $isDone={item.isDone}>{item.content}</Content>
                 <Pv>{item.priority}</Pv>
                 <Date>{item.createdDate}</Date>
                 <Button onClick={openModal}>수정</Button>
