@@ -71,7 +71,7 @@ const ModalBox = styled.div`
     background: white;
     padding: 20px;
     border-radius: 10px;
-    min-width: 300px;
+    min-width: 400px;
 `;
 
 const TodoContainer = styled.div`
