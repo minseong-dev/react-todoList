@@ -1,6 +1,6 @@
 import { selector } from "recoil";
 import { sortedTodoList } from "./sortSelector";
-import { searchState } from "./searchState";
+import { searchState } from "../atoms/searchState";
 
 export const searchedTodoList = selector({
     key: "searchedTodoList",

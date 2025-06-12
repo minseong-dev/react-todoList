@@ -1,6 +1,6 @@
 import { selector } from "recoil";
 import { filteredTodoList } from "./filterSelector";
-import { sortState } from "./sortState";
+import { sortState } from "../atoms/sortState";
 import { PRIORITY_ORDER } from "../../constants/priorityOptions";
 
 export const sortedTodoList = selector({

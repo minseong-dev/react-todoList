@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { todoListState } from "../recoil/todo/todoListState";
+import { todoListState } from "../recoil/atoms/todoListState";
 import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
 
 const TodoModal = ({ onClose, item }) => {

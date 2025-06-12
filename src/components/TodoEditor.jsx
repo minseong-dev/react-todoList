@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useSetRecoilState, useRecoilState } from "recoil";
-import { todoListState } from "../recoil/todo/todoListState";
-import { todoIdState } from "../recoil/todo/todoIdState";
+import { todoListState } from "../recoil/atoms/todoListState";
+import { todoIdState } from "../recoil/atoms/todoIdState";
 import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
 
 const TodoEditor = () => {

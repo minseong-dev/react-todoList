@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { filterState } from "../recoil/todo/filterState";
-import { sortState } from "../recoil/todo/sortState";
+import { filterState } from "../recoil/atoms/filterState";
+import { sortState } from "../recoil/atoms/sortState";
 import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
 
 const TodoFilterSort = () => {

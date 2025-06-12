@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { searchedTodoList } from "../recoil/todo/searchSelector";
-import { searchState } from "../recoil/todo/searchState";
+import { searchedTodoList } from "../recoil/selectors/searchSelector";
+import { searchState } from "../recoil/atoms/searchState";
 
 const TodoList = () => {
     const todoList = useRecoilValue(searchedTodoList);

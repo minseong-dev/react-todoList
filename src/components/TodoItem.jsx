@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import TodoModal from "./TodoModal";
 import { useRecoilState } from "recoil";
-import { todoListState } from "../recoil/todo/todoListState";
+import { todoListState } from "../recoil/atoms/todoListState";
 import React from "react";
 import { PRIORITY_OPTIONS } from "../constants/priorityOptions";
 
