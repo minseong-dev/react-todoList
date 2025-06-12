@@ -31,7 +31,7 @@ const TodoEditor = () => {
             },
         ]);
 
-        setTodoId(todoId + 1);
+        setTodoId(parseInt(todoId) + 1);
 
         setInputData({
             content: "",
