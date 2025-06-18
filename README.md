@@ -1,6 +1,6 @@
 # Recoil 기반 TodoList
 
-> Recoil 상태 관리 라이브러리를 활용하여 필터링, 정렬, 검색 기능을 제공하는 TodoList
+> Recoil 상태 관리 라이브러리를 활용하여 필터링, 정렬, 검색 기능을 제공하는 TodoList  
 > https://react-todo-list-minseong.vercel.app/
 
 <br>
